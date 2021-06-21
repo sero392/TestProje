@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using TestProje.Data;
 
 namespace TestProje
 {
@@ -12,6 +13,11 @@ namespace TestProje
     {
         protected void Application_Start()
         {
+            using (BlogContext cx = new BlogContext())
+            {
+                var s = cx.Bloglar.ToList();
+            }
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
