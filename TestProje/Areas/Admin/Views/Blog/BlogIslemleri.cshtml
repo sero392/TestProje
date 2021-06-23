@@ -1,0 +1,79 @@
+﻿@model TestProje.Models.DbModels.Blog
+
+
+<div class="row">
+    <div class="col">
+        <form id="frmBlog" class="p-5">
+            <div class="row">
+                <div class="col">
+                    <input type="text"
+                           class="form-control"
+                           id="blogBaslik"
+                           placeholder="Blog Başlık"
+                           value="@Model.BlogBaslik" />
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <textarea rows="5"
+                              class="form-control"
+                              id="blogIcerik"
+                              placeholder="Blog İçerik">@Html.Raw(Model.BlogIcerik)
+                    </textarea>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <input type="datetime-local"
+                           class="form-control"
+                           id="yazimTarihi"
+                           placeholder="Yazım Tarihi"
+                           value="@Model.YazimTarihi" />
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <button type="button" class="btn btn-primary" onclick="cmd_blog_islem()">Onay</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+@* Section script işlemi şu işe yarar;
+    Layoutta tanımlı olan javascript dosyaları bu sayfa renderbody alanında çalıştığı için altta kalıyor.
+    Bu nedenle bu sayfada yazılan javascript kodları diğer kütüphaneleri görmüyor Örn. Jquery gibi
+    Bu Yüzden section kullanılır.
+*@
+@section scripts
+{
+    <script>
+        //C# Modelinin Bir Benzerini Javascript İçerisinde Oluşturduk
+        //Bunun neden Kaydedeceğimiz nesnenin C# tarafındaki Nesneyle Aynı Olması Gerekiyor.
+        var obj = {
+            BlogId: 0,
+            BlogBaslik: '',
+            BlogIcerik: '',
+            YazimTarihi: 0,
+            KullaniciId:1
+        }
+
+        cmd_blog_islem = function () {
+            //Oluşturulan Modelin İçerisini Kullanıcıdan Alınan
+            //Verilerle Doldurduk.
+            obj.BlogBaslik = $('#blogBaslik').val();
+            obj.BlogIcerik = $('#blogIcerik').val();
+            obj.YazimTarihi = $('#yazimTarihi').val();
+            obj.BlogId = '@Model.BlogId';
+
+            var url = '/Admin/Blog/PostBlog';
+            $.post(url, obj, function (cevap) {
+                //Yukarıda Belirtilen url'ye
+                //Post İsteği Atar ve Dönen Cevaba Göre İşlem Yapar(AJAX)
+                alert(cevap);
+                window.location.href = "/Admin/Blog/";
+            });
+        }
+    </script>
+
+}

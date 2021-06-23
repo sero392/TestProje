@@ -1,0 +1,51 @@
+﻿@model List<TestProje.Models.DbModels.Blog>
+
+<div class="row mt-3">
+    <div class="col">
+        <a href="@Url.Action("BlogIslemleri","Blog")" class="btn btn-primary">Yeni Ekle</a>
+
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Blog Başlık</td>
+            <td>Blog İçerik</td>
+            <td>Yazım Tarihi</td>
+            <td>İslemler</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var blog in Model)
+        {
+            <tr>
+                <td>@blog.BlogBaslik</td>
+                <td>@blog.BlogIcerik</td>
+                <td>@blog.YazimTarihi</td>
+                <td>
+                    <button class="btn btn-danger btn-sm rounded-0" onclick="cmd_blog_sil('@blog.BlogId')">Sil</button>
+                    <a class="btn btn-warning btn-sm rounded-0" href="@Url.Action("BlogIslemleri","Blog",new { blogId = blog.BlogId })">Güncelle</a>
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        cmd_blog_sil = function (blogId) {
+            var url = '/Admin/Blog/BlogSilme?blogId=' + blogId;
+            var soru = confirm("Silmek İstediğinize Emin misiniz ?");
+            if (soru) {
+                $.post(url, function (cevap) {
+                    alert(cevap);
+                    window.location.reload();
+                });
+            }
+
+        }
+    </script>
+}

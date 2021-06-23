@@ -1,0 +1,47 @@
+﻿<form id="frmBlog" class="p-5">
+    <div class="row">
+        <div class="col">
+            <input type="text" class="form-control" id="blogBaslik" placeholder="Blog Başlık" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <textarea rows="5" class="form-control" id="blogIcerik" placeholder="Blog İçerik"></textarea>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <input type="datetime-local" class="form-control" id="yazimTarihi" placeholder="Yazım Tarihi" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <button type="button" class="btn btn-primary" onclick="cmd_blog_ekle()">Onay</button>
+        </div>
+    </div>
+</form>
+@section scripts{
+    <script>
+        var obj = {
+            BlogId: 0,
+            BlogBaslik: '',
+            BlogIcerik: '',
+            YazimTarihi: 0,
+            KullaniciId : 1,
+        };
+
+        cmd_blog_ekle = function () {
+            obj.BlogBaslik = $('#blogBaslik').val();
+            obj.BlogIcerik = $('#blogIcerik').val();
+            obj.YazimTarihi = $('#yazimTarihi').val();
+
+            var url = '/Admin/Home/PostBlogIslemleri';
+            $.post(url, obj, function (res) {
+                alert(res);
+            });
+            
+        }
+
+       
+    </script>
+}
