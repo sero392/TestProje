@@ -1,0 +1,47 @@
+﻿<form id="frmblod" class="p-2">
+    <div class="row m-2">
+        <div class="col">
+            <input type="text" class="form-control" name="name" value="" id="blogbaslik" placeholder="Blog başlık" />
+        </div>
+    </div>
+    <div class="row m-2">
+        <div class="col">
+            <input type="text" class="form-control" name="name" value="" id="blogicerik" placeholder="Blog içerik" />
+        </div>
+    </div>
+    <div class="row m-2">
+        <div class="col">
+            <input type="datetime-local" class="form-control" name="name" value="" id="yazimtarihi" placeholder="Yazım Tarihi" />
+        </div>
+    </div>
+    <div class="row m-2">
+        <div class="col">
+            <button class="btn btn-primary btn-sm rounded-5" onclick="cmd_ekle_tekrar">Onay</button>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    <script>
+        var obj = {
+            BlogId: 0,
+            BlogBaslik: '',
+            BlogIcerik: '',
+            YazimTarihi: 0,
+            KullaniciId: 1,
+        };
+
+        cmd_ekle_tekrar = function () {
+            obj.BlogBaslik = $('#blogbaslik').val();
+            obj.BlogIcerik = $('#blogicerik').val();
+            obj.YazimTarihi = $('#yazimtarihi').val();
+        }
+
+        var url = 'Admin/Tekrar/BlogIslemleriTekrar';
+        $.post(url, obj, function (res) {
+            alert(res);
+        });
+
+    </script>
+}
+

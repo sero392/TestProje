@@ -1,0 +1,29 @@
+﻿@model List<TestProje.Models.DbModels.Blog>
+
+<div class="row m-2">
+    <div class="col">
+        <a href="@Url.Action("BlogIslemleri","Home")" class="btn btn-primary">ekle</a>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Blog Başlık</td>
+            <td>Blog İçerik</td>
+            <td>Yazim Tarihi</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var blog in Model)
+        {
+        <tr>
+            <td>@blog.BlogBaslik</td>
+            <td>@blog.BlogIcerik</td>
+            <td>@blog.YazimTarihi</td>
+
+        </tr>
+        }
+
+    </tbody>
+    
+</table>

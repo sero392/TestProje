@@ -14,6 +14,6 @@ namespace TestProje.Data
             Database.SetInitializer<BlogContext>(null);
         }
 
-        public DbSet<Blog> Bloglar { get; set; }
+        public DbSet<Blog > Bloglar { get; set; }
     }
 }

@@ -8,14 +8,17 @@ using TestProje.Models.DbModels;
 
 namespace TestProje.Areas.Admin.Controllers
 {
-    public class HomeController : Controller
-    { 
-        // GET: Admin/Home
+    public class KategoriController : Controller
+    {
         public ActionResult Index()
         {
+            List<Kategori> kategori = new List<Kategori>(); //Db models ismi ile
+            using (BlogContext cx=new BlogContext())
+            {
+                
+            }
+
             return View();
         }
-
-
     }
 }
