@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -42,7 +43,12 @@ namespace TestProje.Areas.Admin.Controllers
                     if (blog2.BlogId > 0)
                     {
                         var oldModel = x.Bloglar.FirstOrDefault(s => s.BlogId == blog2.BlogId);
-                        oldModel = blog2;
+                        
+                        oldModel.BlogBaslik = blog2.BlogBaslik;
+                        oldModel.BlogIcerik = blog2.BlogIcerik;
+                        oldModel.YazimTarihi = blog2.YazimTarihi;
+
+                        x.Entry(oldModel).State = EntityState.Modified;
                         x.SaveChanges();
                         islem = "Kayıt Gündcellendi...";
                     }
